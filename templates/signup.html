@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='remchat_logo.png') }}"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+  </head>
+
+  <body style="background-color: #36454f">
+    <header>
+      <img
+        src="{{ url_for('static', filename='remchat_logo.png') }}"
+        alt="Remchat Logo"
+        class="logo"
+      />
+      <h3 class="site-title">REMCHAT</h3>
+      <button class="nav-toggle">☰</button>
+      <nav class="navbar">
+        <a href="{{ url_for('index') }}" class="submit-button">Login</a>
+        <a href="{{ url_for('signup') }}" class="submit-button"
+          >Create Account</a
+        >
+      </nav>
+    </header>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %}
+    <ul class="flashes">
+      {% for category, message in messages %}
+      <li class="alert alert-{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+
+    <main class="container">
+      <img
+        src="{{ url_for('static', filename='remchat_logo.png') }}"
+        alt="Remchat Application Logo"
+        width="100"
+        height="auto"
+        sizes="(max-width: 600px) 100w, 50vw"
+      />
+      <div>
+        <h1>Sign Up</h1>
+        <form action="{{ url_for('signup') }}" method="POST" id="myForm">
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            placeholder="Full Name"
+          />
+          <input
+            type="text"
+            id="username"
+            name="username"
+            required
+            placeholder="Username"
+          />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            placeholder="Email"
+          />
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            placeholder="Password"
+          />
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            required
+            placeholder="Confirm Password"
+          />
+          <span
+            id="errorMessage"
+            style="color: red; display: none"
+            role="alert"
+          ></span>
+          <br />
+          <button type="submit" class="submit-button">Sign Up</button>
+        </form>
+      </div>
+    </main>
+
+    <footer>
+      <small><p>&copy; 2024 Remchat. All rights reserved.</p></small>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/verify_passwd.js') }}"></script>
+    <script>
+      // Get the input elements
+      const nameInput = document.getElementById("name");
+      const usernameInput = document.getElementById("username");
+      const emailInput = document.getElementById("email");
+      const passwordInput = document.getElementById("password");
+      const confirmPasswordInput = document.getElementById("confirmPassword");
+      const errorMessage = document.getElementById("errorMessage");
+
+      // Load the saved values from local storage
+      window.onload = function () {
+        const savedName = localStorage.getItem("name");
+        const savedUsername = localStorage.getItem("username");
+        const savedEmail = localStorage.getItem("email");
+
+        if (savedName) {
+          nameInput.value = savedName;
+        }
+        if (savedUsername) {
+          usernameInput.value = savedUsername;
+        }
+        if (savedEmail) {
+          emailInput.value = savedEmail;
+        }
+      };
+
+      // Save the values to local storage when the input changes
+      nameInput.addEventListener("input", function () {
+        localStorage.setItem("name", nameInput.value);
+      });
+
+      usernameInput.addEventListener("input", function () {
+        localStorage.setItem("username", usernameInput.value);
+      });
+
+      emailInput.addEventListener("input", function () {
+        localStorage.setItem("email", emailInput.value);
+      });
+
+      // Password confirmation check
+      confirmPasswordInput.addEventListener("input", function () {
+        if (passwordInput.value !== confirmPasswordInput.value) {
+          errorMessage.textContent = "Passwords do not match.";
+          errorMessage.style.display = "block";
+        } else {
+          errorMessage.style.display = "none";
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat Room</title>
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='remchat_logo.png') }}"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.10/purify.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <img
+        src="{{ url_for('static', filename='remchat_logo.png') }}"
+        alt="Remchat Logo"
+        class="logo"
+      />
+      <h3 class="site-title">CHATS</h3>
+      <button class="nav-toggle">☰</button>
+      <nav class="navbar">
+        <a
+          href="{{ url_for('dashboard', username=session['username']) }}"
+          class="submit-button"
+          >Dashboard</a
+        >
+        <a
+          href="{{ url_for('messages_route', username=session['username']) }}"
+          class="submit-button"
+          >Messages</a
+        >
+        <a
+          href="{{ url_for('search_users_view', username=session['username']) }}"
+          class="submit-button"
+          >Search</a
+        >
+        <a
+          href="{{ url_for('post_content_view', username=session['username']) }}"
+          class="submit-button"
+          >Post</a
+        >
+        <a
+          href="{{ url_for('posts_view', username=session['username']) }}"
+          class="submit-button"
+          >Post Feeds</a
+        >
+        <a href="/logout" class="submit-button">Logout</a>
+      </nav>
+    </header>
+
+    <section>
+      <div class="creator_info" style="position: fixed; z-index: 2000">
+        <img
+          class="creator-image"
+          src="data:image/jpeg;base64,{{ user_info.profile_picture }}"
+          alt="Creator Image"
+          style="width: 50px; height: 50px"
+        />
+        <span class="name">{{ user_info.name }}</span>
+      </div>
+    </section>
+
+    <main class="container">
+      <div class="chat-container">
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %}
+        <ul class="flashes">
+          {% for category, message in messages %}
+          <li class="alert alert-{{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %} {% endwith %}
+
+        <div
+          id="chat-history"
+          class="chat-history"
+          data-user-id="{{ user_id }}"
+        >
+          {% for chat in chat_history %}
+          <div
+            class="chat-box {% if 'You' in chat.sender_name %} sent {% else %} received {% endif %}"
+            data-sender="{{ chat.sender_name }}"
+          >
+            <div class="message-content">
+              <span class="messages">{{ chat.message }}</span>
+            </div>
+            <div class="timestamp-info">
+              <small class="timestamp"><em>{{ chat.timestamp }}</em></small>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="form-container">
+          <form
+            method="POST"
+            id="myForm"
+            onsubmit="sendMessage(); return false"
+          >
+            <textarea
+              name="message"
+              rows="3"
+              autocomplete="on"
+              placeholder="Type your message..."
+              required
+            ></textarea>
+            <button type="submit" class="submit-button">Send &rArr;</button>
+          </form>
+        </div>
+
+        <div id="targetUsername" data-value="{{ user_info.name }}"></div>
+        <div id="room_id" data-value="{{ room }}"></div>
+        <div
+          id="sessionUsername"
+          data-username="{{ session['username'] }}"
+        ></div>
+      </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/chat_room.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <script>
+      var iconUrl = "{{ url_for('static', filename='remchat_logo.png') }}"; // Assign URL to a variable
+    </script>
+  </body>
+</html>
