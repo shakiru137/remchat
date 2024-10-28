@@ -13,7 +13,7 @@ def load_previous_users(user_id):
         user_id (int): The ID of the current user.
 
     Returns:
-        list: A list of previous chat users.
+        list: A list of previous chats users.
     """
     previous_chats = []
     try:
