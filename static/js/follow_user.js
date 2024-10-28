@@ -18,7 +18,7 @@ socket.on("follow_response", function (data) {
 });
 
 // Function to toggle follow/unfollow status
-function toggleFollowStatus(user_id) {
+function follow_user(user_id) {
   const buttonValue = document.getElementById("button_value_" + user_id); // Get button for this user
 
   if (!buttonValue) {
