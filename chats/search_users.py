@@ -4,7 +4,7 @@ from functions.system_picture import system_picture
 
 def search_users(cursor, search_query, current_user_id):
     """
-    Searches for users in the database by username.
+    Searches for users in the database by username to follow or unfollow.
 
     Retrieves users whose usernames match the search query, excluding the current user.
 
