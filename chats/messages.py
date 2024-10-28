@@ -5,7 +5,7 @@ from chats.load_previous_users import load_previous_users
 
 def messages():
     """
-    Handles displaying messages and searching for users.
+    Handles displaying messages and searching for other users to message.
 
     Processes both GET and POST requests. On POST, it searches for users based on 
     the provided query and returns results. On GET, it fetches and displays previous chat users.
