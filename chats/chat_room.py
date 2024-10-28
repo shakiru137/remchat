@@ -13,7 +13,7 @@ def chat_room(user_id, current_user_id, current_username):
         current_username (str): The username of the current user.
 
     Returns:
-        Rendered HTML template of the chat room with the chat history.
+        Rendered HTML template of the chat room with the chats history.
     """
     if not session.get('username'):
         flash('You need to log in first!', 'warning')
