@@ -10,7 +10,7 @@ CREATE TABLE users (
     following_count INT DEFAULT 0
 );
 
--- Followers table
+-- Followers and Followees table
 CREATE TABLE followers (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
