@@ -24,7 +24,7 @@ from posts.delete_post import delete_post
 from posts.post_content import post_content
 from posts.post_comment import comment_page
 
-# Initialize Flask app and configure session
+# Initialize Flask app and configure app session
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "i_don't_have_it_yet"
 app.config['SESSION_TYPE'] = "filesystem"
