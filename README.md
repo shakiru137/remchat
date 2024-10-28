@@ -1,6 +1,6 @@
 # RemChat
 
-RemChat is a real-time chat application built with Flask, leveraging the power of WebSockets through Flask-SocketIO. This application allows users to sign up, log in, chat with friends, follow/unfollow users, and post content.
+RemChat is a real-time chat application built with Flask, leveraging the power of WebSockets through Flask-SocketIO. This application allows users to sign up, log in, chat with friends, follow/unfollow users, and post content
 
 ## Table of Contents
 
