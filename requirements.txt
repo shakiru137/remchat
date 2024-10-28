@@ -4,3 +4,4 @@ Flask-SocketIO==5.0.1
 Flask-Session==0.4.0
 mysql-connector-python==8.0.26
 eventlet==0.31.0
+Bcrypt
