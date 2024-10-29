@@ -2,7 +2,7 @@ console.log("I am in the script");
 
 var socket = io();
 
-// Constants for button states
+// Constants for button states.
 const BUTTON_STATE_LIKE = "Like";
 const BUTTON_STATE_LIKED = "Liked";
 
