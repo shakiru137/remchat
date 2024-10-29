@@ -3,7 +3,7 @@ from functions.get_db_connection import get_db_connection
 
 def comment_page(post_id):
     """
-    Handles both loading and posting comments for a specific post.
+    Handles both loading and posting comments for a specific post
 
     Args:
         post_id (int): The ID of the post to add or view comments.
