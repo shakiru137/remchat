@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", (event) => {
-  // Constants
+  // Constants.
   const FLASH_MESSAGE_DURATION = 5000; // Duration before fading out flash messages
   const FLASH_FADE_OUT_DURATION = 1000; // Duration for fade out effect
 
