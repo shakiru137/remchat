@@ -8,7 +8,7 @@ def login_required(f):
 
     If the user is not logged in, they will be redirected to the index page
     with a warning message. It checks both session and cookie to determine 
-    the user's login status.
+    the user's login status
 
     Args:
         f (function): The view function to be decorated.
