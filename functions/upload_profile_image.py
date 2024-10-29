@@ -5,7 +5,7 @@ import base64
 
 def encode_image(image):
     """
-    Compresses and encodes the image to Base64 format.
+    Compresses and encodes the image to Base64 format
 
     Args:
         image (FileStorage): The image file uploaded by the user.
