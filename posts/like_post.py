@@ -4,7 +4,7 @@ from functions.get_db_connection import get_db_connection
 
 def like_post(data):
     """
-    Handles the 'like_post' event when a user likes or unlikes a post.
+    Handles the 'like_post' event when a user likes or unlikes any post.
 
     Args:
         data (dict): Contains the 'post_id' for the post the user interacts with.
