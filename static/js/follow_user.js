@@ -1,6 +1,6 @@
 var socket = io();
 
-// Constants for button states
+// Constants for button states.
 const BUTTON_STATE_FOLLOW = "Follow";
 const BUTTON_STATE_FOLLOWING = "Following";
 
