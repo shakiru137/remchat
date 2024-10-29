@@ -6,7 +6,7 @@ from functions.system_picture import system_picture
 def user_dashboard():
     """
     Displays the user dashboard, allowing the user to upload a profile image
-    and view their details.
+    and view their details
 
     Returns:
         Response: Renders the dashboard template with user details and profile image.
