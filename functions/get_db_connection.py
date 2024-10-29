@@ -6,7 +6,7 @@ def get_db_connection():
 
     This function attempts to connect to the specified MySQL database and 
     returns the connection object if successful. In case of a connection 
-    error, it logs the error and returns None.
+    error, it logs the error and return None.
 
     Returns:
         mysql.connector.connection.MySQLConnection or None: 
