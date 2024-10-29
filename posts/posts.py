@@ -9,7 +9,7 @@ def load_paginated_posts():
     like status, comment counts, and proper date formatting.
 
     Args:
-        None.
+        None
 
     Returns:
         Response: Renders the posts page with either the fetched posts or an empty list.
