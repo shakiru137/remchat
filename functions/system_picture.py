@@ -4,7 +4,7 @@ import base64
 def system_picture():
     """
     Reads an image file named 'picture.jpg' located in the same directory as the script,
-    encodes it in Base64 format, and returns the encoded string.
+    encodes it in Base64 format, and returns the encoded string
 
     Returns:
         str: Base64 encoded string of the image if the file exists and is readable.
