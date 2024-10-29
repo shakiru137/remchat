@@ -5,7 +5,7 @@ import base64
 
 def post_content():
     """
-    Handles the creation of a new post, including optional content and an image.
+    Handles the creation of a new post, including optional content and an image
 
     This function processes a POST request to create a new post in the database.
     It validates the input, compresses the image if provided, and stores the post in the database.
