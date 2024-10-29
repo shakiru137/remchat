@@ -4,7 +4,7 @@ from functions.get_db_connection import get_db_connection
 
 def follow_user(data):
     """
-    Handles the logic for following a user in real-time using Socket.IO.
+    Handles the logics for following a user in real-time using Socket.IO.
 
     Args:
         data (dict): Contains 'user_id', representing the ID of the user to follow.
