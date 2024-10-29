@@ -7,7 +7,7 @@ COOKIE_EXPIRATION_TIME = 60 * 60 * 10  # 10 hours
 
 def login_user():
     """
-    Handles user login by verifying the provided username and password.
+    Handles user login by verifying the provided username and password provided.
 
     This function retrieves the username and password from the login form, 
     checks them against the database, and establishes a session if the 
