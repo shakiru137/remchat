@@ -13,7 +13,7 @@ def check_password(password):
     return len(password) > 6 and any(char.isdigit() for char in password)
 
 def user_exists(cursor, username, email, name):
-    """Check if the user already exists based on username, email, or name."""
+    """Check if the user already exists based on username, email, or name"""
     cursor.execute(
         "SELECT * FROM users WHERE username = %s OR email = %s OR name = %s", 
         (username, email, name)
