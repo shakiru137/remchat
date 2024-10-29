@@ -3,7 +3,7 @@ document.getElementById("myForm").addEventListener("submit", function (e) {
   const confirmPassword = document.getElementById("confirmPassword").value;
   const errorMessage = document.getElementById("errorMessage");
 
-  // Check if passwords match
+  // Check if passwords match.
   if (password !== confirmPassword) {
     e.preventDefault(); // Prevent form submission
     errorMessage.textContent = "Passwords do not match!";
