@@ -3,7 +3,7 @@ from functions.get_db_connection import get_db_connection
 
 def delete_post(post_id):
     """
-    Deletes a post from the database.
+    Deletes a post from the database storage.
 
     Args:
         post_id (int): The ID of the post to be deleted.
