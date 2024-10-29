@@ -3,7 +3,7 @@ from functions.get_db_connection import get_db_connection
 
 def log_out():
     """
-    Logs out the current user by clearing the session and cookies.
+    Logs out the current user by clearing the session and cookies
 
     This function closes the database connection, removes the user's session 
     information, and redirects the user to the index page. It also sets the 
