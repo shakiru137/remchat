@@ -4,7 +4,7 @@ from functions.system_picture import system_picture
 
 def search_users_logic():
     """
-    Handles user search functionality by querying users based on the search query.
+    Handles user search functionality by querying users based on the search query
     
     Returns:
         - search_results: List of user search results for the current page.
