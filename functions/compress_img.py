@@ -3,7 +3,7 @@ import tinify
 # Image compression function
 def compress_img(image):
     """
-    Compresses an image using the Tinify API.
+    Compresses an image using the Tinify API
 
     This function takes an image file, compresses it using the Tinify 
     service, and returns the compressed image in a buffer format.
