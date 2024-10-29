@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     chatHistory.scrollTop = chatHistory.scrollHeight;
   }
 
-  // Check if the browser supports notifications
+  // Checks if the browser supports notifications
   if ("Notification" in window && Notification.permission !== "granted") {
     Notification.requestPermission();
   }
