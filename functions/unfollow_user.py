@@ -4,7 +4,7 @@ from functions.get_db_connection import get_db_connection
 
 def unfollow_user(data):
     """
-    Handles the unfollowing of a user.
+    Handles the unfollowing of a user in the app.
 
     Args:
         data (dict): Contains the user_id of the user to unfollow.
