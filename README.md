@@ -1,151 +1,160 @@
-# RemChat
+# Remchat - Real-time Chat Application
 
-RemChat is a real-time chat application built with Flask, leveraging the power of WebSockets through Flask-SocketIO. This application allows users to sign up, log in, chat with friends, follow/unfollow users, and post content
-
-## Table of Contents
-
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Routes](#routes)
-- [Socket Events](#socket-events)
-- [Contributing](#contributing)
-- [License](#license)
+Remchat is a real-time chat application built with Flask and Socket.IO, featuring user authentication, direct messaging, and post sharing capabilities.
 
 ## Features
 
-- User registration and authentication
-- Real-time messaging with WebSocket support
-- User profiles with follow/unfollow functionality
-- Post content and comments on posts
-- Search for users
-- Responsive design
+- User authentication (signup, login, logout)
+- Real-time chat functionality
+- Post creation and sharing
+- User profiles and following system
+- Direct messaging
+- Image sharing
+- Like and comment system
+- Search functionality
 
-## Technologies Used
+## Prerequisites
 
-- Python
-- Flask
-- Flask-SocketIO
-- Flask-Babel (for localization)
-- Flask-Session
-- MySQL (for database management)
-- HTML/CSS/JavaScript (for front-end)
-- Bootstrap (for responsive design)
+- Python 3.8 or higher
+- MySQL 8.0 or higher
+- pip (Python package manager)
+- Git
 
 ## Installation
 
-1. **Clone the repository:**
+1. Clone the repository:
 
-   ```bash
-   git clone https://github.com/shakiru137/remchat.git
-   cd remchat
-   ```
+```bash
+git clone https://github.com/shakiru137/remchat.git
+cd remchat
+```
 
-2. **Create a virtual environment:**
+2. Create and activate a virtual environment:
 
-   ```bash
-   python3 -m venv venv
-   ```
+```bash
+# On Windows
+python -m venv venv
+venv\Scripts\activate
 
-3. **Activate the virtual environment:**
+# On macOS/Linux
+python3 -m venv venv
+source venv/bin/activate
+```
 
-   #### On windows
+3. Install the required packages:
 
-   ```bash
-   venv\Scripts\activate
-   ```
+```bash
+pip install -r requirements.txt
+```
 
-   #### On macOS/Linux:
+## Database Setup
 
-   ```bash
-   source venv/bin/activate
-   ```
+1. Create a MySQL database:
 
-4. **Install the required packages:**
+```sql
+CREATE DATABASE remchat;
+```
 
-   ```bash
-   Install the required packages:
-   ```
+2. Create a MySQL user and grant privileges:
 
-5. **Install the required packages:**
+```sql
+CREATE USER 'remchat_user'@'localhost' IDENTIFIED BY 'your_password';
+GRANT ALL PRIVILEGES ON remchat.* TO 'remchat_user'@'localhost';
+FLUSH PRIVILEGES;
+```
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+3. Import the database schema:
 
-6. **Run the application:**
+```bash
+mysql -u remchat_user -p remchat < database.sql
+```
 
-   ```bash
-   python3 app.py
-   ```
+4. Configure the database connection:
+   - Copy `.env.example` to `.env`
+   - Update the database credentials in `.env`:
 
-## Usage
+```
+DB_USER=remchat_user
+DB_PASSWORD=your_password
+DB_HOST=localhost
+DB_NAME=remchat
+```
 
-- Navigate to http://127.0.0.1:5000 to access the login page.
-- Sign up for a new account or log in if you already have one.
-- Once logged in, you can access the user dashboard, send messages, follow/unfollow users, and create posts.
+## Environment Variables
+
+Create a `.env` file in the root directory with the following variables:
+
+```
+SECRET_KEY=your_secret_key
+DB_USER=your_db_user
+DB_PASSWORD=your_db_password
+DB_HOST=localhost
+DB_NAME=remchat
+```
+
+## Running the Application
+
+1. Start the Flask development server:
+
+```bash
+python app.py
+```
+
+2. Access the application at `http://localhost:5000`
 
 ## Project Structure
 
-```bash
+```
 remchat/
-│
-├── app.py                     # Main application file
-├── requirements.txt           # Python dependencies
-├── static/                    # Static files (CSS, JS, images)
-│   ├── css/
-│   ├── js/
-│   └── images/
-├── templates/                 # HTML templates
-│   ├── index.html
-│   ├── signup.html
-│   ├── dashboard.html
-│   └── search.html
-├── functions/                 # Helper functions
-│   ├── login_user.py
-│   ├── signup_user.py
-│   ├── user_dashboard.py
-│   ├── follow_user.py
-│   ├── unfollow_user.py
-│   ├── search_users_logic.py
-│   ├── log_out.py
-│   ├── get_db_connection.py
-│   └── login_required.py
-└── chats/                     # Chat-related functionalities
-    ├── messages.py
-    └── chat_room.py
-└── posts/                     # Post-related functionalities
-    ├── load_paginated_posts.py
-    ├── like_post.py
-    ├── delete_post.py
-    ├── post_content.py
-    └── post_comment.py
+├── app.py                 # Main application file
+├── database.sql          # Database schema
+├── requirements.txt      # Python dependencies
+├── .env                 # Environment variables
+├── static/              # Static files
+│   ├── css/            # CSS stylesheets
+│   ├── js/             # JavaScript files
+│   └── images/         # Image assets
+├── templates/           # HTML templates
+└── tests/              # Test files
 ```
 
-## Routes
+## Testing
 
-- / or /index: Login page
-- /signup: User registration
-- /dashboard/<username>: User dashboard
-- /search/<username>: User search results
-- /messages/<username>: User messages
-- /chat_room/<username>/<int:user_id>: Chat room for messaging
-- /posts/<username>/: View user posts
-- /post_content/<username>: Post content
-- /comment/<int:post_id>: Comment on a post
-- /logout: Log out
+Run the test suite:
 
-## Socket Events
+```bash
+pytest
+```
 
-- follow: Event to follow a user
-- unfollow: Event to unfollow a user
-- join: Event to join a chat room
-- leave: Event to leave a chat room
-- message: Event to send and receive messages
-- like_post: Event to like a post
+## Security Features
 
-## ContributingContributing
+- Password hashing using bcrypt
+- CSRF protection
+- SQL injection prevention
+- XSS protection
+- Secure session management
+- Input sanitization
 
-- Contributions are welcome! Please feel free to submit a pull request or open an issue for any bugs or suggestions.
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Support
+
+For support, please open an issue in the GitHub repository or contact the maintainers.
+
+## Acknowledgments
+
+- Flask
+- Socket.IO
+- MySQL
+- Bootstrap
+- Font Awesome

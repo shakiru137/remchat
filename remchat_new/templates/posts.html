@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <title>User Posts</title>
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='remchat_logo.png') }}"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+  </head>
+
+  <body style="background-color: #355839">
+    <!-- Header section with logo, site title, and navigation links -->
+    <header>
+      <img
+        src="{{ url_for('static', filename='remchat_logo.png') }}"
+        alt="Remchat Logo"
+        class="logo"
+      />
+      <h3 class="site-title">POST FEEDS</h3>
+      <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+      <nav class="navbar">
+        <a
+          href="{{ url_for('dashboard', username=session['username']) }}"
+          class="submit-button"
+          >Dashboard</a
+        >
+        <a
+          href="{{ url_for('messages_route', username=session['username']) }}"
+          class="submit-button"
+          >Messages</a
+        >
+        <a
+          href="{{ url_for('search_users_view', username=session['username']) }}"
+          class="submit-button"
+          >Search</a
+        >
+        <a
+          href="{{ url_for('post_content_view', username=session['username']) }}"
+          class="submit-button"
+          >Post</a
+        >
+        <a
+          href="{{ url_for('posts_view', username=session['username']) }}"
+          class="submit-button"
+          >Post Feeds</a
+        >
+        <a href="/logout" class="submit-button">Logout</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Flash messages for user notifications -->
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %}
+      <ul class="flashes">
+        {% for category, message in messages %}
+        <li class="alert alert-{{ category }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %} {% endwith %}
+
+      <!-- Post Container: Displays posts dynamically -->
+      <div id="post-container">
+        {% if posts %} {% for post in posts %}
+        <article
+          class="{% if post.picture %} post {% else %} text-post {% endif %}"
+        >
+          <!-- Display options for the creator to delete the post -->
+          {% if post.is_my_post %}
+          <div class="post-options">
+            <details>
+              <summary>☰</summary>
+              <form
+                action="{{ url_for('delete_post_view', post_id=post.id) }}"
+                method="POST"
+              >
+                <button
+                  type="submit"
+                  class="delete-btn"
+                  aria-label="Delete Post"
+                >
+                  Delete Post
+                </button>
+              </form>
+            </details>
+          </div>
+          {% endif %}
+
+          <!-- Post creator information -->
+          <div class="creator_info">
+            <img
+              class="creator-image"
+              src="data:image/jpeg;base64,{{ post.creator_picture }}"
+              alt="Creator Image"
+            />
+            <span>{{ post.creator_name }}</span>
+          </div>
+
+          <!-- Post content -->
+          <p class="text-content">{{ post.content }}</p>
+
+          <!-- Display post picture if available -->
+          {% if post.picture %}
+          <div class="withPicture">
+            <img
+              class="picture-posted"
+              src="data:image/jpeg;base64,{{ post.picture }}"
+              alt="Post Image"
+            />
+          </div>
+          {% endif %}
+
+          <!-- Like and comment section -->
+          <div class="like-comment-container">
+            <p><span id="loading">{{ post.created_at_str }}</span></p>
+
+            <div class="flex-container">
+              <!-- Left block for likes and like button -->
+              <div class="like-block">
+                <p>
+                  <span id="like-count-{{ post.id }}"
+                    >{{ post.likes or 0 }} Like{{ 's' if post.likes != 1 else ''
+                    }}</span
+                  >
+                </p>
+                <input
+                  type="button"
+                  class="{% if post.is_liked_by_current_user %} like-btn {% else %} like-btn-disabled {% endif %}"
+                  id="button_value_{{ post.id }}"
+                  onclick="like_post('{{ post.id }}')"
+                  value="{% if post.is_liked_by_current_user %} Liked {% else %} Like {% endif %}"
+                  aria-label="{% if post.is_liked_by_current_user %} Unlike {% else %} Like {% endif %}"
+                />
+              </div>
+
+              <!-- Right block for comments -->
+              <div class="comment-block">
+                <p>
+                  {{ post.comment_count }} Comment{{ 's' if post.comment_count
+                  != 1 else '' }}
+                </p>
+                <a
+                  href="{{ url_for('comment_page_view', post_id=post.id, page=request.args.get('page', 1)) }}"
+                  class="comment-btn"
+                  id="comment-link-{{ post.id }}"
+                  data-post-id="{{ post.id }}"
+                  aria-label="View comments"
+                  >Comments</a
+                >
+              </div>
+            </div>
+          </div>
+        </article>
+        {% endfor %} {% else %}
+        <p>No posts available.</p>
+        {% endif %}
+      </div>
+
+      <!-- Pagination controls for navigating between pages -->
+      <div class="pagination">
+        {% if page > 1 %}
+        <a href="?page={{ page - 1 }}" class="submit-button">Previous</a>
+        {% endif %}
+
+        <p id="loading">Page {{ page }}</p>
+
+        {% if page < total_pages %}
+        <a href="?page={{ page + 1 }}" class="submit-button">Next</a>
+        {% endif %}
+      </div>
+    </main>
+
+    <!-- Footer section -->
+    <footer>
+      <small><p>&copy; 2024 Remchat. All rights reserved.</p></small>
+    </footer>
+
+    <!-- External scripts -->
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/like_post.js') }}"></script>
+  </body>
+</html>
