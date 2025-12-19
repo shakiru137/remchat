@@ -58,15 +58,15 @@ CREATE DATABASE remchat;
 2. Create a MySQL user and grant privileges:
 
 ```sql
-CREATE USER 'remchat_user'@'localhost' IDENTIFIED BY 'your_password';
-GRANT ALL PRIVILEGES ON remchat.* TO 'remchat_user'@'localhost';
+CREATE USER 'myuser'@'localhost' IDENTIFIED BY 'your_password';
+GRANT ALL PRIVILEGES ON remchat.* TO 'myuser'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
 3. Import the database schema:
 
 ```bash
-mysql -u remchat_user -p remchat < database.sql
+mysql -u myuser -p remchat < database.sql
 ```
 
 4. Configure the database connection:

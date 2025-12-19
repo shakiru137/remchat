@@ -1,0 +1,32 @@
+# System / OS dependencies (Ubuntu / WSL)
+
+python3-full
+python3-venv
+python3-dev
+
+# MySQL
+mysql-server
+mysql-client
+default-libmysqlclient-dev
+
+# Build tools (needed by some Python packages)
+build-essential
+
+# Install and setup mysql database
+sudo mysql
+CREATE USER 'myuser'@'localhost' IDENTIFIED BY 'oluwasegun137';
+GRANT ALL PRIVILEGES ON *.* TO 'myuser'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+CREATE USER IF NOT EXISTS 'myuser'@'localhost' IDENTIFIED BY 'oluwasegun137';
+GRANT ALL PRIVILEGES ON remchat.* TO 'myuser'@'localhost';
+FLUSH PRIVILEGES;
+EXIT;
+
+CREATE DATABASE remchat;
+EXIT;
+
+mysql -u myuser -p mydatabase < database.sql
+
+# Optional but recommended
+pkg-config
+
